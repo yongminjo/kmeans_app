@@ -1,0 +1,25 @@
+name: deploy #디플로이라는 이름 명명
+
+# Controls when the workflow will run
+on: # 언제 작동될꺼냐.
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:  # 푸시가 될때 작동하게 해줘
+    branches: # 메인 브랜치
+      - main
+
+
+jobs: # 어떤 일을 할꺼야?
+  SSH:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: ssh to ec2
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          script: |
+            cd Github/kmeans_app/                      
+            git pull
