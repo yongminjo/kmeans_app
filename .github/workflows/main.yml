@@ -23,3 +23,6 @@ jobs: # 어떤 일을 할꺼야?
           script: |
             cd Github/kmeans_app/                      
             git pull
+
+  # 깃허브 레파지토리가 프라이빗으로 만들어져 있을때. 
+  # git pull https://${{ secrets.GIT_USER }}:${{ secrets.GIT_PASSWORD }}@github.com/blockenters/streamlit_kmeans.git
